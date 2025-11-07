@@ -1,0 +1,252 @@
+JAVA NOTES:::
+
+
+IMPLICIT TYPECASTING : when we type cast from lower data type to larger, there is no chance of sata loss, so compiler can do the typecasting by itself.
+
+EXPLICIT TYPECASTING : when we type cast from larger data type to lower, there is a chance of data loss, so we have to do the typecasting by ourselves.
+
+// Example of implicit typecasting
+int a = 10;
+long b = a; // int to long, implicit typecasting
+// Example of explicit typecasting in JAVA:
+double x = 9.78;
+//float to num:
+float y = (float) x; // double to float, explicit typecasting
+
+float num1 = 134.6f; //explaination: ''f' is used to indicate that the number is a float literal
+int num2 = (int) num1; // float to int, explicit typecasting
+// Note: This will truncate the decimal part, resulting in num2 being 134
+
+
+Q) what is the use of static keyword in java?
+A) The static keyword in Java is used to indicate that a particular member (variable or method) belongs to the class itself rather than to instances of the class. This means that static members can be accessed without creating an instance of the class. Static members are shared among all instances of the class.
+
+Q) What is the difference between static and non-static methods in Java?
+A) The main differences between static and non-static methods in Java are:
+1. **Static Methods**:
+   - Belong to the class itself, not to any specific instance.
+   - Can be called without creating an instance of the class.
+   - Can only access static variables and static methods directly.
+   - Cannot access instance variables or instance methods directly.
+2. **Non-Static Methods**:
+   - Belong to instances of the class.
+    - Must be called on an instance of the class.
+    - Can access both static and instance variables and methods.
+
+// Example of static method
+public class Example {
+    static void staticMethod() {
+        System.out.println("This is a static method.");
+    }
+    void nonStaticMethod() {
+        System.out.println("This is a non-static method.");
+    }
+    public static void main(String[] args) {
+        Example obj = new Example();
+        Example.staticMethod(); // Calling static method without instance
+        obj.nonStaticMethod(); // Calling non-static method with instance
+    }
+}   
+
+
+
+
+============================================================================================
+
+
+JVM calls main method first, so it is the entry point of the program.
+The main method must be declared as public, static, and void, and it must accept a single argument of type String array (String[] args).
+The main method can also be declared as public static void main(String... args) to accept a variable number of arguments, but this is less common.
+The main method can be overloaded, but the JVM will always call the version with the String array parameter.
+The main method can be declared in any class, but it is typically declared in the class that contains the main logic of the program.
+
+JVM calls the main method in the following way:
+1. The JVM loads the class containing the main method.
+2. It verifies that the main method is declared correctly (public, static, void, and accepts a String array).
+3. It invokes the main method, passing any command-line arguments as an array of strings.
+4. The main method executes, and when it completes, the JVM terminates the program. 
+
+Classname variable = new Classname(); // Creating an instance of the class
+
+
+=================================================================================================
+
+Q) How a program is run and executed in Java? And role of JVM in it?
+A) When a Java program is run, the following steps occur:
+1. **Compilation**: The Java source code (.java file) is compiled by the Java compiler (javac) into bytecode (.class file). This bytecode is platform-independent and can be executed on any platform that has a Java Virtual Machine (JVM).
+2. **Loading**: The JVM loads the compiled bytecode into memory. It reads the .class files and prepares them for execution.
+3. **Verification**: The JVM verifies the bytecode to ensure that it adheres to Java's security and integrity constraints. This step checks for illegal code that could violate access rights   or cause security issues.
+4. **Execution**: The JVM interprets or compiles the bytecode into native machine code, which is specific to the underlying operating system and hardware. This process can involve Just-In-Time (JIT) compilation, where frequently executed code is compiled into native code for performance optimization.
+5. **Runtime**: The JVM executes the native code, managing memory allocation, garbage collection, and other runtime tasks. It also provides a runtime environment for the Java program, allowing it to interact with system resources and libraries.
+6. **Termination**: Once the program completes execution, the JVM cleans up resources, performs garbage collection, and terminates the program.     
+
+
+============================================================================================================
+
+rt.jar is a core library in Java. It contains the Java Runtime Environment (JRE) classes that are essential for running Java applications. This includes classes from the Java Standard Edition (Java SE) API, such as java.lang, java.util, and java.io packages. The rt.jar file is located in the lib directory of the JRE installation and is automatically included in the classpath when a Java program is executed.
+
+It has packages like:
+- java.lang: Contains fundamental classes that are essential for Java programming, such as String, Object, and System.
+- java.util: Contains utility classes such as collections framework (List, Set, Map), date and time classes, and random number generation.
+- java.io: Contains classes for input and output operations, such as File, InputStream, OutputStream, and Reader.
+- java.net: Contains classes for networking operations, such as URL, Socket, and ServerSocket.
+- java.awt: Contains classes for building graphical user interfaces (GUIs) and handling events, such as Button,
+
+
+Inside rt.jar is package folder which has sub-packages containing the actual class files and interfaces.
+
+
+There are 2 types of package in Java:
+Java and Javax.
+- **Java**: This is the standard package that comes with the Java Development Kit (JDK) and contains the core classes and interfaces of the Java programming language. It includes packages like java.lang, java.util, java.io, and others that are essential for Java programming.
+
+- **Javax**: This package is used for extensions and additional libraries that are not part of the core Java API. The "javax" package is typically used for APIs that are developed after the initial release of Java. It includes packages like javax.swing (for GUI components), javax.servlet (for web applications), and javax.xml (for XML processing). The "javax" prefix indicates that these packages are part of the Java extension mechanism, allowing developers to add new functionality to the Java platform without modifying the core Java API.
+
+In short, the diff between "java" and "javax" is:
+- **Java**: Contains core classes and interfaces essential for Java programming.
+- **Javax**: Contains additional libraries and extensions that enhance the Java platform with new functionalities
+and APIs.
+
+what is a package in Java?
+A package in Java is a namespace that organizes a set of related classes and interfaces. It helps to avoid naming conflicts, control access, and group related functionality together. Packages can be thought of as directories or folders that contain Java classes and interfaces. They provide a way to structure code and make it easier to manage large applications.
+
+// Example of creating a package
+package com.example.myapp;  
+
+
+
+==========================================
+
+method nextInt() in java.util.Scanner class is used to read an integer value from the input stream. It scans the input until it finds a valid integer and returns it as an int type. If the input is not a valid integer, it throws an InputMismatchException. AND in this we need to create first an object of Scanner class and then call the nextInt() method on that object, because nextInt() is an instance method of the Scanner class.
+also it is a non-static method, so it cannot be called directly without an instance of the Scanner class.
+
+Scanner scanner = new Scanner(System.in);
+int number = scanner.nextInt(); // Reads an integer from the input stream
+
+java.lang is the default sub-package in Java (under Java and not Javax), which contains fundamental classes that are essential for Java programming. It includes classes like String, Object, System, Math, Thread, and others that are automatically imported into every Java program. This means you don't need to explicitly import the java.lang package; it is available by default.
+
+=======================================================================
+
+#ACCESS MODIFIERS IN JAVA:
+Access modifiers are used for handling the accessibility.
+Access modifiers in Java determine the visibility and accessibility of classes, methods, and variables. They control how these members can be accessed from other classes or packages. Understanding access modifiers is crucial for encapsulation and maintaining the integrity of your code.
+
+There are four access modifiers in Java that control the visibility of classes, methods, and variables:
+1. **public**: The member is accessible from any other class in any package.
+2. **protected**: The member is accessible within its own package and by subclasses in other   
+packages. We can use them outside the package only if we inherit the class.
+3. **default** (no modifier): The member is accessible only within its own package.
+4. **private**: The member is accessible only within its own class. And for package-private, it is accessible only within its own package.
+
+
+
+
+========================================================================
+
+Here Resources means the classes, methods, and variables that are available for use in a Java program. These resources can be part of the Java standard library, third-party libraries, or user-defined classes. Understanding how to access and utilize these resources is essential for effective Java programming.
+
+Inside METHODS we can use all access modifiers: static and instance methods:
+
+| Modifier      | Static Member | Non-Static Member | Local Variable | Static Block | Instance Block |
+| ------------- | ------------- | ----------------- | -------------- | ------------ | -------------- |
+| **private**   | ✅ Yes         | ✅ Yes             | ❌ No           | ✅ Yes        | ✅ Yes          |
+| **protected** | ✅ Yes         | ✅ Yes             | ❌ No           | ✅ Yes        | ✅ Yes          |
+| **default**   | ✅ Yes         | ✅ Yes             | ❌ No           | ✅ Yes        | ✅ Yes          |
+| **public**    | ✅ Yes         | ✅ Yes             | ❌ No           | ✅ Yes        | ✅ Yes          |
+
+================
+//Now we'll see how to call methods of some other class in a different class:
+public class ClassA {
+    public void methodA() {
+        System.out.println("Method A in Class A");
+    }
+} 
+public class ClassB {
+    public void methodB() {
+        ClassA objA = new ClassA(); // Creating an instance of ClassA
+        objA.methodA(); // Calling methodA from ClassA
+    }
+    
+    public static void main(String[] args) {
+        ClassB objB = new ClassB();
+        objB.methodB(); // Calling methodB from ClassB
+    }
+}
+
+//OUTPUT:
+Method A in Class A
+Method B in Class B 
+
+// In this example, ClassB creates an instance of ClassA and calls its methodA. This demonstrates how to access methods from another class in Java.
+
+
+When we want to call any non-static method of a class, we need to create an instance of that class first. This is because non-static methods belong to instances of the class, and they can access instance variables and other non-static methods directly.
+we need to write something like this:
+Access(// its class name) access(//its variable name) = new(//keyword) Access() (//constructor); // Creating an instance of the Access class
+eg: Access access = new Access();
+
+
+when JVM runs this above line that this is what happens:
+//but first see what JVM has : stack, heap, and method area, PC registers, Native method stack.
+1. **Stack**: The JVM creates a new stack frame for the method call, which contains local variables, method parameters, and the return address.
+2. **Heap**: The JVM allocates memory in the heap for the new object of the Access class. This memory is used to store the instance variables of the Access object.
+3. **Method Area**: The JVM loads the Access class into the method area, which contains the class's metadata, including its methods and variables.
+4. **PC Register**: The JVM updates the Program Counter (PC) register to point to the next instruction to be executed.
+5. **Native Method Stack**: If the Access class has any native methods, the JVM prepares the native method stack to handle those calls.
+
+now when the line Access access = new Access(); is executed, the JVM performs the following steps:
+
+1. It checks if the Access class is already loaded in the method area. If not, it loads the class and prepares its metadata.
+2. It allocates memory in the heap for the new Access object.
+3. It initializes the instance variables of the Access object to their default values (null for objects, 0 for numeric types, false for boolean, etc.).
+4. It calls the constructor of the Access class to initialize the object. If no constructor is defined, the default constructor is called.
+5. The reference to the newly created Access object is assigned to the variable `access`.
+6. The JVM updates the stack frame to include the local variable `access`, which now holds the reference to the Access object. 
+
+THe buffer area is called object in java, which is used to store the reference of the object created from the class. The object is a runtime entity that represents an instance of a class. It contains the state (data/variables) and behavior (methods) defined by the class. When you create an object, the JVM allocates memory for it in the heap and initializes it according to the class definition.
+
+Constructor uses the keyword "new" to create an instance of a class. It is a special method that is called when an object is created. The constructor initializes the object's state and can take parameters to set initial values for instance variables. If no constructor is defined, the JVM provides a default constructor that initializes instance variables to their default values.
+
+WHenever JVM sees new keyword, it creates a new object in the heap memory. The `new` keyword is used to allocate memory for the object and invoke the constructor of the class. This process involves several steps:
+Reference Id is the address of the object in the heap memory. It is a unique identifier for the object and is used to access the object's properties and methods. The reference ID is not the actual object itself but a pointer to the memory location where the object is stored.
+Constructor uses this reference id and put this in the variable access, which is an instance of the Access class. The reference ID allows you to interact with the object and access its methods and properties.
+
+
+
+
+Syntax of Reference id: six digits hexadecimal number, which is the address of the object in the heap memory.
+
+
+
+
+================================================
+PRIMITIVE VS NON-PRIMITIVE DATA TYPES IN JAVA:
+=================================================
+
+Class in java: class in java is a blueprint for creating objects. It defines the properties (data/variables) and behaviors (methods) that the objects created from the class will have. A class can contain
+
+CLASS has : Name, data/variables, methods.
+
+Object in java: An object is an instance of a class. It is created from the class blueprint and has its own state (values of properties) and behavior (methods). Objects are used to represent real-world entities or concepts in a program.
+Object has: Reference, state, and behavior.
+
+
+=============================================
+
+Q) what is the difference between static and non-static methods in Java?
+A) The main differences between static and non-static methods in Java are:
+1. **Static Methods**:
+   - Get their memory in the method area.
+   going to occupy memory single time, no matter how many times the class is instantiated.
+   - Belong to the class itself, not to any specific instance.
+   - Can be called without creating an instance of the class.
+   - Can only access static variables and static methods directly.
+   - Cannot access instance variables or instance methods directly.
+
+2. **Non-Static Methods**:
+   - Get their memory in the heap or buffer area.
+   going to occupy memory every time the class is instantiated.
+   - Belong to instances of the class.
+   - Can be called only on instances of the class.
+   - Can access both instance variables and static variables directly.
+   - Can access instance methods and static methods directly.
